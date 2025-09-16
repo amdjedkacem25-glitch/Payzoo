@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>FREE FIRE - شحن</title>
+<style>
+body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.back-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.back-btn:hover { transform: scale(1.1); }
+
+.game-page { margin-top: 70px; padding: 0 20px; }
+.game-info img { width:180px; border-radius:10px; border:2px solid #444; }
+.game-name { margin-top:10px; font-size:24px; font-weight:bold; color:#ffcc00; }
+
+.section-frame { border: 2px solid #ff0000; border-radius: 12px; padding: 5px; margin: 15px auto; max-width: 400px; background: linear-gradient(135deg, #111, #222); }
+.prices { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 15px; }
+.prices img { width: 80px; height: 80px; border-radius: 12px; border: none; cursor: pointer; transition: all 0.3s ease; }
+.prices img:hover { transform: scale(1.05); }
+
+#offer-buttons img { width:100px; height:100px; }
+
+.price-section { margin-top: 15px; padding:15px; width:250px; margin:auto; background:linear-gradient(135deg,#111,#222); border-radius:12px; border:2px solid #ff0000; box-shadow:0 4px 10px rgba(0,0,0,0.7); font-size:20px; font-weight:bold; color:#ffcc00; min-height:50px; display:flex; align-items:center; justify-content:space-between; max-height:0; overflow:hidden; transition:max-height 0.5s ease,padding 0.5s ease; direction:ltr;}
+.price-section.show { max-height:70px; padding:15px; margin-bottom:40px; }
+
+.buy-btn { padding:10px 20px; background:#ff0000; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:0.3s; }
+.buy-btn:hover { background:#ff5555; }
+
+#purchase-form {
+    display:none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#111;
+    border:2px solid #ff0000;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    z-index:9999;
+    width:420px;
+}
+#purchase-form input { margin:10px 0; padding:10px; width:85%; border-radius:8px; border:none; }
+
+.payment-btn { margin:5px; width:100px; padding:10px; border-radius:8px; cursor:pointer; background:#222; color:#fff; border:2px solid #ff0000; display:inline-block; transition:0.3s; }
+.payment-btn.selected { background:#ff0000; color:#fff; }
+
+#complete-btn { margin-top:10px; padding:10px 20px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; background:#ff0000; color:#fff; }
+
+#order-success { display:none; margin-top:15px; color:#fff; font-weight:bold; text-align:center; }
+#order-code-wrapper { display:inline-flex; align-items:center; background:#222; padding:5px 10px; border-radius:8px; margin-top:10px; color:#fff; font-weight:bold; }
+#copy-code-btn { width:24px; height:24px; margin-left:10px; cursor:pointer; }
+
+#insta-btn { width:40px; height:40px; cursor:pointer; margin-top:10px; background:none; border:none; }
+</style>
+</head>
+<body>
+
+<img src="https://i.postimg.cc/YqdJqNk2/1000098493-removebg-preview.png" alt="عودة" class="back-btn" onclick="window.location.href='index.html'">
+
+<div class="game-page">
+  <div class="game-info">
+    <img src="https://i.postimg.cc/QM4hTLcP/1.jpg" alt="FREE FIRE" id="game-image">
+    <div class="game-name">FREE FIRE</div>
+  </div>
+
+  <!-- إطار كمية الشحن -->  
+  <div class="section-frame">  
+    <div class="section-title">كمية الشحن</div>  
+    <div class="prices" id="quantity-buttons">  
+      <div class="quantity-item">  
+        <img src="https://i.postimg.cc/TYw6zV4x/gxkurrekb1exx9ken9xw.png" data-price="400 DZ" data-offer="100 جوهرة" alt="100">  
+      </div>  
+      <div class="quantity-item">  
+        <img src="https://i.postimg.cc/nh9tzHxw/tqsf7ziusgga5ar2vaio.png" data-price="950 DZ" data-offer="200 جوهرة" alt="200">  
+      </div>  
+      <div class="quantity-item">  
+        <img src="https://i.postimg.cc/Gh5Cd4Wy/urisrx5ulgzuccmj4bck.png" data-price="1450 DZ" data-offer="500 جوهرة" alt="500">  
+      </div>  
+      <div class="quantity-item">  
+        <img src="https://i.postimg.cc/VNyP03Ls/dylx6kkr31iutjpamy6s.png" data-price="2700 DZ" data-offer="1000 جوهرة" alt="1000">  
+      </div>  
+      <div class="quantity-item">  
+        <img src="https://i.postimg.cc/QMpGQ0HQ/qwh8rrr1u09dmlqqpliv.png" data-price="5500 DZ" data-offer="2000 جوهرة" alt="2000">  
+      </div>  
+      <div class="quantity-item">  
+        <img src="https://i.postimg.cc/Y9McbYWJ/noqcaqapzg7ugrjxvonq.png" data-price="14200 DZ" data-offer="5000 جوهرة" alt="5000">  
+      </div>  
+      <div class="quantity-item">  
+        <img src="https://i.postimg.cc/B6gryb5t/x3brgxk0n48n6h06bfu3.png" data-price="26600 DZ" data-offer="10000 جوهرة" alt="10000">  
+      </div>  
+    </div>  
+  </div>  
+
+  <!-- إطار العروض الخاصة -->  
+  <div class="section-frame">  
+    <div class="section-title">عروض خاصة</div>  
+    <div class="prices" id="offer-buttons">  
+      <img src="https://i.postimg.cc/SRxBp4Vd/epjrm6xbg8e0lusveoj9.png" data-price="3500 DZ" data-offer="عضوية شهرية" alt="عضوية شهرية">  
+      <img src="https://i.postimg.cc/6qbDWPmX/phyxhsvsph747e2mrvlz.png" data-price="750 DZ" data-offer="عضوية اسبوعية" alt="عضوية اسبوعية">  
+      <img src="https://i.postimg.cc/9Xx3Y4Fn/bwbvbh1ui9nfxxeyodwx.png" data-price="450 DZ" data-offer="عضوية مخففة" alt="عضوية مخففة">  
+      <img src="https://i.postimg.cc/KctfmwCr/1000098516-removebg-preview.png" data-price="450 DZ" data-offer="بويا باس" alt="بويا باس">  
+    </div>  
+  </div>  
+
+  <div class="price-section show" id="price-display">
+    <button class="buy-btn" id="buy-btn">شراء</button>
+    <span id="price-text"></span>
+  </div>
+</div>
+
+<div id="purchase-form">
+    <img src="https://i.postimg.cc/YqdJqNk2/1000098493-removebg-preview.png" alt="رجوع" class="back-btn" onclick="closePurchase()">
+
+    <div style="margin-bottom:10px; font-size:18px; color:#ffcc00;">أدخل بياناتك</div>
+    <input type="text" id="user-name" placeholder="الاسم">
+    <input type="text" id="user-id" placeholder="ID اللعبة">
+
+    <div style="margin-top:10px;">اختر طريقة الدفع</div>
+    <div id="payment-methods">
+        <div class="payment-btn" data-pay="Flexy">Flexy</div>
+    </div>
+
+    <button id="complete-btn">إتمام الشراء</button>
+
+    <div id="order-success">
+        تم الطلب يرجى نسخ الكود وتوجه إلى الإنستغرام<br>
+        <div id="order-code-wrapper">
+            <span id="order-code"></span>
+            <span id="copy-code-btn"></span>
+        </div>
+        <br>
+        <button id="insta-btn"></button>
+    </div>
+</div>
+
+<script>
+document.getElementById('insta-btn').innerHTML = `
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.96.246 2.423.418a4.92 4.92 0 011.77 1.03 4.92 4.92 0 011.03 1.77c.172.463.362 1.254.418 2.423.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.246 1.96-.418 2.423a4.92 4.92 0 01-1.03 1.77 4.92 4.92 0 01-1.77 1.03c-.463.172-1.254.362-2.423.418-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.96-.246-2.423-.418a4.92 4.92 0 01-1.77-1.03 4.92 4.92 0 01-1.03-1.77c-.172-.463-.362-1.254-.418-2.423C2.212 15.584 2.2 15.2 2.2 12s.012-3.584.07-4.85c.056-1.17.246-1.96.418-2.423a4.92 4.92 0 011.03-1.77 4.92 4.92 0 011.77-1.03c.463-.172 1.254-.362 2.423-.418C8.416 2.212 8.8 2.2 12 2.2zm0-2.2C8.736 0 8.332.013 7.052.072 5.78.131 4.797.308 4.042.57c-.768.27-1.418.63-2.072 1.284S.84 2.85.57 3.618C.308 4.373.131 5.356.072 6.628.013 7.908 0 8.312 0 12c0 3.688.013 4.092.072 5.372.059 1.272.236 2.255.498 3.01.27.768.63 1.418 1.284 2.072s1.304 1.014 2.072 1.284c.755.262 1.738.439 3.01.498C8.332 23.987 8.736 24 12 24s3.668-.013 4.948-.072c1.272-.059 2.255-.236 3.01-.498.768-.27 1.418-.63 2.072-1.284s1.014-1.304 1.284-2.072c.262-.755.439-1.738.498-3.01.059-1.28.072-1.684.072-5.372s-.013-4.092-.072-5.372c-.059-1.272-.236-2.255-.498-3.01-.27-.768-.63-1.418-1.284-2.072S20.828.84 20.06.57c-.755-.262-1.738-.439-3.01-.498C15.668.013 15.264 0 12 0z"/><path d="M12 5.838a6.162 6.162 0 106.162 6.162A6.162 6.162 0 0012 5.838zm0 10.162a3.999 3.999 0 113.999-3.999A3.999 3.999 0 0112 16zm6.406-11.845a1.44 1.44 0 11-1.44-1.44 1.44 1.44 0 011.44 1.44z"/></svg>
+`;
+
+document.getElementById('copy-code-btn').innerHTML = `
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z"/></svg>
+`;
+
+const allButtons = document.querySelectorAll('.prices img');
+const priceText = document.getElementById('price-text');
+const priceDisplay = document.getElementById('price-display');
+
+let selectedPrice = "";
+let selectedOffer = "";
+let orderCode = "";
+let selectedPayment = "";
+let selectedImage = "";
+
+allButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        selectedPrice = btn.getAttribute('data-price');
+        selectedOffer = btn.getAttribute('data-offer');
+        selectedImage = btn.src; // ← صورة العرض
+        priceText.textContent = selectedPrice;
+        priceDisplay.classList.add('show');
+    });
+});
+
+const buyBtn = document.getElementById('buy-btn');
+const purchaseForm = document.getElementById('purchase-form');
+buyBtn.addEventListener('click', ()=>{
+    if(!selectedPrice){ alert("اختر كمية الشحن أو العرض أولاً!"); return; }
+
+    orderCode = "FF-"+Math.floor(Math.random()*900000+100000);
+    document.getElementById('order-code').textContent = orderCode;
+
+    document.getElementById('order-success').style.display = "none";
+    document.getElementById('complete-btn').disabled = false;
+
+    purchaseForm.style.display = "block";
+});
+
+const paymentBtns = document.querySelectorAll('.payment-btn');
+paymentBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        paymentBtns.forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedPayment = btn.getAttribute('data-pay');
+    });
+});
+
+const completeBtn = document.getElementById('complete-btn');
+completeBtn.addEventListener('click', ()=>{
+    const name = document.getElementById('user-name').value.trim();
+    const id = document.getElementById('user-id').value.trim();
+
+    if(!name || !id || !selectedPayment){ alert("يرجى تعبئة جميع البيانات واختيار طريقة الدفع!"); return; }
+
+    document.getElementById('order-success').style.display = "block";
+    completeBtn.disabled = true;
+
+    // إرسال إلى Telegram مع صورة العرض
+    const botToken = "8469013787:AAH8SqXy4fwA54oiyTZ-ddEQUEDgAPI1AwU";
+    const chatId = "6647031145";
+
+    const message = `
+طلب جديد:
+اللعبة: FREE FIRE
+نوع العرض: ${selectedOffer}
+كمية الشحن: ${selectedPrice}
+الاسم: ${name}
+ID: ${id}
+طريقة الدفع: ${selectedPayment}
+كود الطلب: ${orderCode}
+`;
+
+    fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            chat_id: chatId,
+            photo: selectedImage,
+            caption: message
+        })
+    });
+});
+
+document.getElementById('copy-code-btn').addEventListener('click', ()=>{
+    navigator.clipboard.writeText(document.getElementById('order-code').textContent);
+});
+
+document.getElementById('insta-btn').addEventListener('click', ()=>{
+    window.open("https://instagram.com/YourProfile","_blank");
+});
+
+function closePurchase(){
+    purchaseForm.style.display = "none";
+    document.getElementById('user-name').value = "";
+    document.getElementById('user-id').value = "";
+    selectedPayment = "";
+    paymentBtns.forEach(b=>b.classList.remove('selected'));
+}
+</script>
+</body>
+</html>

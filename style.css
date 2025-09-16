@@ -1,0 +1,109 @@
+/* الجسم والخلفية */
+body {  
+  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);  
+  color: #fff;  
+  margin: 0;  
+  padding: 0;  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  text-align: center;  
+}  
+
+/* الشريط العلوي */
+.header {  
+  padding: 20px;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  background: transparent;  
+}
+
+.logo {  
+  width: 220px;   
+  height: auto;   
+  filter: drop-shadow(0 0 8px #ff0000);
+  transition: transform 0.3s ease;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+/* عنوان القسم */
+.section-title {
+  font-size: 28px;
+  margin: 25px 0 15px;
+  text-align: left;
+  padding-left: 20px;
+  color: #ff4444;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+/* صندوق يحتوي الشبكة */
+.content-box {
+  margin: 0 20px 50px; 
+  padding: 25px;
+  background: rgba(20, 20, 20, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+.content-box:hover {
+  transform: translateY(-3px);
+}
+
+/* شبكة الألعاب والتطبيقات */
+.games-grid {  
+  display: grid;  
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));  
+  gap: 20px;  
+  justify-content: center; 
+}  
+
+/* شكل كل عنصر */
+.game {  
+  background: #111;  
+  cursor: pointer;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 10px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+}
+.game:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+}
+
+/* صورة العنصر */
+.game img {  
+  width: 100px;  
+  height: 100px;  
+  object-fit: cover;  
+  border-radius: 12px;  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.game:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255,0,0,0.7);
+}
+
+/* اسم العنصر */
+.game-name {
+  margin-top: 8px;      
+  font-size: 14px;      
+  color: #fff;          
+  text-align: center;   
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.game:hover .game-name {
+  color: #ff4444;
+}
+
+
