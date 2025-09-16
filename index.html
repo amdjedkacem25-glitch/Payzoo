@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Games & Apps</title>
   <style>
-    /* الجسم والخلفية */
     body {  
       background: #000;  
       color: #fff;  
@@ -15,7 +14,6 @@
       text-align: center;  
     }  
 
-    /* الشريط العلوي */
     .header {  
       padding: 20px;  
       display: flex;  
@@ -29,7 +27,6 @@
       height: auto;   
     }
 
-    /* عنوان القسم */
     .section-title {
       font-size: 24px;
       margin: 20px 0 10px;
@@ -37,23 +34,20 @@
       padding-left: 20px;
     }
 
-    /* صندوق يحتوي الشبكة */
     .content-box {
-      margin: 0 20px 40px; /* يبعد الصندوق عن حواف الشاشة */
+      margin: 0 20px 40px;
       padding: 20px;
       background: #111;
       border-radius: 15px;
     }
 
-    /* شبكة الألعاب والتطبيقات */
     .games-grid {  
       display: grid;  
-      grid-template-columns: repeat(3, 1fr); /* ✅ 3 أعمدة مرنة */
-      gap: 15px;  
-      justify-items: center; /* توسيط العناصر */
+      grid-template-columns: repeat(3, 100px);
+      gap: 30px;  
+      justify-content: center;  
     }  
 
-    /* شكل كل عنصر */
     .game {  
       width: 100px;  
       background: transparent;  
@@ -65,29 +59,151 @@
       color: inherit;
     }  
 
-    /* صورة العنصر */
     .game img {  
       width: 100px;  
       height: 100px;  
       object-fit: cover;  
       border-radius: 10px;  
+      transition: transform 0.3s;
     }  
 
-    /* اسم العنصر */
+    .game img:hover {
+      transform: scale(1.05);
+    }
+
     .game-name {
       margin-top: 5px;      
       font-size: 13px;      
       color: #fff;          
       text-align: center;   
     }
+
+    /* ✅ ألعاب غير متوفرة */
+    .disabled {
+      opacity: 0.5;
+      pointer-events: auto; 
+    }
+
+    /* ✅ النافذة المنبثقة */
+    .popup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .popup-content {
+      background: linear-gradient(145deg, #111, #222);
+      padding: 25px;
+      border-radius: 15px;
+      width: 320px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+      animation: scaleUp 0.4s ease-in-out;
+    }
+
+    @keyframes scaleUp {
+      from {transform: scale(0.8);}
+      to {transform: scale(1);}
+    }
+
+    .popup-content h2 {
+      margin-top: 0;
+      color: #ffd700;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      display: none;
+    }
+
+    .countdown {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #0f0;
+    }
   </style>
 </head>
 <body>
+
+
+<!-- ✅ نافذة منبثقة -->
+<div class="popup" id="popup" style="display:none;">
+  <div class="popup-content">
+    <button class="close-btn" id="closeBtn" onclick="closePopup()">X</button>
+    <p>مرحبًا بك في موقع الألعاب، استمتع بالتجربة ✨</p>
+    <h2>خطوات الشراء</h2>
+    <p>1 ـ اختر اللعبة التي تناسبك</p>
+    <p>2 ـ اختر العرض الذي تريد ثم اضغط شراء</p>
+    <p>3 ـ قم بإدخال معلوماتك</p>
+    <p>4 ـ انسخ الكود وتوجه إلى انستغرام وقم بإرساله</p>
+    <div class="countdown" id="countdown">إغلاق بعد 5 ثواني...</div>
+  </div>
+</div>
+
+<script>
+  // ✅ إظهار النافذة مرة كل 24 ساعة
+  window.onload = function() {
+    const lastShown = localStorage.getItem("popupLastShown");
+    const now = Date.now();
+    const oneDay = 24 * 60 * 60 * 1000; // 24 ساعة
+
+    if (!lastShown || (now - lastShown > oneDay)) {
+      document.getElementById("popup").style.display = "flex";
+      startCountdown();
+      localStorage.setItem("popupLastShown", now);
+    }
+  }
+
+  function startCountdown() {
+    let seconds = 5;
+    const countdown = document.getElementById("countdown");
+    const closeBtn = document.getElementById("closeBtn");
+
+    const timer = setInterval(() => {
+      seconds--;
+      countdown.textContent = "إغلاق بعد " + seconds + " ثواني...";
+      if (seconds <= 0) {
+        clearInterval(timer);
+        countdown.style.display = "none";
+        closeBtn.style.display = "block";
+      }
+    }, 1000);
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+
+  function notAvailable() {
+    alert("غير متوفر حاليا ❌");
+  }
+</script>
+
   <div class="header">
     <img src="https://i.postimg.cc/QxBdDMGz/1757389070726.jpg" alt="Logo" class="logo">
   </div>
 
-  <!-- قسم الألعاب -->
   <h2 class="section-title">Games</h2>
   <div class="content-box">
     <div class="games-grid">
@@ -99,32 +215,24 @@
       <a href="lol.html" class="game"><img src="https://i.postimg.cc/G2vBJhzt/images-12.jpg"><span class="game-name">LEAGUE OF LEGENDS</span></a>  
       <a href="mobilelegends.html" class="game"><img src="https://i.postimg.cc/qvCpCD1M/images-13.jpg"><span class="game-name">MOBILE LEGENDS</span></a>  
       <a href="brawlstars.html" class="game"><img src="https://i.postimg.cc/P5MtdvJd/2.png"><span class="game-name">BRAWL STARS</span></a>  
-      <a href="warzone.html" class="game"><img src="https://i.postimg.cc/7LGJhN2g/COD-Warzone-Mobile-Key-Art.png"><span class="game-name">WARZONE</span></a>  
-      <a href="efootball.html" class="game"><img src="https://i.postimg.cc/jSTxV4s8/image.png"><span class="game-name">E FOOTBALL</span></a>  
-      <a href="fcmobile.html" class="game"><img src="https://i.postimg.cc/LscY1ZtG/images-14.jpg"><span class="game-name">FC MOBILE</span></a>  
       <a href="bloodstrike.html" class="game"><img src="https://i.postimg.cc/261mdHw5/4.jpg"><span class="game-name">BLOOD STRIKE</span></a>  
       <a href="genshin.html" class="game"><img src="https://i.postimg.cc/QxzXCZky/images-15.jpg"><span class="game-name">GENSHINE IMPACT</span></a>  
       <a href="farlight.html" class="game"><img src="https://i.postimg.cc/P5qwsHfV/images-16.jpg"><span class="game-name">FARLIGHT</span></a>  
-      <a href="fortnite.html" class="game"><img src="https://i.postimg.cc/VkHbzhdf/images-17.jpg"><span class="game-name">FORTNITE</span></a>  
+      <a href="deltaforce.html" class="game"><img src="https://i.postimg.cc/DfQDtrXm/images-30.jpg"><span class="game-name">DELTA FORCE</span></a>  
       <a href="clashroyal.html" class="game"><img src="https://i.postimg.cc/85xGZhKm/7.jpg"><span class="game-name">CLASHROYAL</span></a>  
       <a href="arenabreakout.html" class="game"><img src="https://i.postimg.cc/m2jH5k4F/images-18.jpg"><span class="game-name">ARENA BREAKOUT</span></a>  
       <a href="undawn.html" class="game"><img src="https://i.postimg.cc/X745LFRb/images-19.jpg"><span class="game-name">UNDAWN</span></a>  
       <a href="wuthernigwaves.html" class="game"><img src="https://i.postimg.cc/zXvzqGWh/images-20.jpg"><span class="game-name">WUTHERNIG WAVES</span></a>  
 
+      <!-- ✅ آخر 3 ألعاب غير متوفرة -->
+      <div class="game disabled" onclick="notAvailable()"><img src="https://i.postimg.cc/7LGJhN2g/COD-Warzone-Mobile-Key-Art.png"><span class="game-name">WARZONE</span></div>  
+      <div class="game disabled" onclick="notAvailable()"><img src="https://i.postimg.cc/jSTxV4s8/image.png"><span class="game-name">E FOOTBALL</span></div>  
+      <div class="game disabled" onclick="notAvailable()"><img src="https://i.postimg.cc/LscY1ZtG/images-14.jpg"><span class="game-name">FC MOBILE</span></div>  
+
     </div>
   </div>
 
-  <!-- قسم التطبيقات -->
-  <h2 class="section-title">Apps</h2>
-  <div class="content-box">
-    <div class="games-grid">
-      <a href="netflix.html" class="game"><img src="https://i.postimg.cc/j5jst9sx/11.png"><span class="game-name">NETFLIX</span></a>  
-      <a href="crunshyroll.html" class="game"><img src="https://i.postimg.cc/8k91gtxG/13.png"><span class="game-name">CRUNCHYROLL</span></a>  
-      <a href="shahd.html" class="game"><img src="https://i.postimg.cc/0jTxGy7j/19.jpg"><span class="game-name">SHAHD</span></a>  
-      <a href="chatgbt.html" class="game"><img src="https://i.postimg.cc/cCg08ngP/images-21.jpg"><span class="game-name">CHAT GPT+</span></a>  
-      <a href="app5.html" class="game"><img src="https://i.postimg.cc/TwHTw9wr/12.png"><span class="game-name">SNAP+</span></a>  
-      <a href="app6.html" class="game"><img src="https://i.postimg.cc/8cXnQbdh/app6.jpg"><span class="game-name">App 6</span></a>  
-    </div>
-  </div>
+
+
 </body>
-</html>
+        </html>
